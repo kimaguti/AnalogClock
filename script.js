@@ -8,6 +8,7 @@ function updateClock() {
   const minute = now.getMinutes();
   const second = now.getSeconds();
 
+  // Update the hour, minute, and second hand rotations
   const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
   const minuteDeg = minute * 6 + (second / 60) * 6;
   const secondDeg = second * 6;
