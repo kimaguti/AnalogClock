@@ -1,24 +1,24 @@
-const hourHand = document.querySelector('.hour');
-const minuteHand = document.querySelector('.minute');
-const secondHand = document.querySelector('.second');
-
 function updateClock() {
+  const hourElement = document.getElementById("hour");
+  const minuteElement = document.getElementById("minute");
+  const secondElement = document.getElementById("second");
+
   const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
 
-  // Calculate the rotation for each hand
-  const hourDeg = (hours % 12) * 30 + (minutes / 60) * 30; // 360 / 12 = 30 degrees per hour
-  const minuteDeg = minutes * 6 + (seconds / 60) * 6; // 360 / 60 = 6 degrees per minute
-  const secondDeg = seconds * 6; // 360 / 60 = 6 degrees per second
+  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
+  const minuteDeg = minute * 6 + (second / 60) * 6;
+  const secondDeg = second * 6;
 
-  // Apply the rotations to each hand
-  hourHand.style.transform = `translate(-50%, -50%) rotate(${hourDeg}deg)`;
-  minuteHand.style.transform = `translate(-50%, -50%) rotate(${minuteDeg}deg)`;
-  secondHand.style.transform = `translate(-50%, -50%) rotate(${secondDeg}deg)`;
+  hourElement.style.transform = `rotate(${90 + hourDeg}deg)`;
+  minuteElement.style.transform = `rotate(${90 + minuteDeg}deg)`;
+  secondElement.style.transform = `rotate(${90 + secondDeg}deg)`;
 }
 
-// Update the clock every second
+// Update every second
 setInterval(updateClock, 1000);
-updateClock(); // Call once to immediately set the clock
+
+// Initial call to set clock to the correct time
+updateClock();
