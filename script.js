@@ -8,10 +8,10 @@ function updateClock() {
   const minute = now.getMinutes();
   const second = now.getSeconds();
 
-  // Update the hour, minute, and second hand rotations
-  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
-  const minuteDeg = minute * 6 + (second / 60) * 6;
-  const secondDeg = second * 6;
+  // Calculate degrees for each hand
+  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; // 30 degrees per hour
+  const minuteDeg = minute * 6 + (second / 60) * 6; // 6 degrees per minute
+  const secondDeg = second * 6; // 6 degrees per second
 
   hourElement.style.transform = `rotate(${90 + hourDeg}deg)`;
   minuteElement.style.transform = `rotate(${90 + minuteDeg}deg)`;
