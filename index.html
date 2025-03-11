@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analog Glow Clock</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .clock {
+      width: 300px;
+      height: 300px;
+      border: 10px solid #fff;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.7));
+    }
+
+    .hour, .minute, .second {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      transform-origin: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition-timing-function: steps(1);
+      transition-duration: 0.5s;
+    }
+
+    .hour {
+      width: 8px;
+      height: 60px;
+      background-color: #ffcc00;
+      box-shadow: 0 0 20px #ffcc00;
+    }
+
+    .minute {
+      width: 6px;
+      height: 80px;
+      background-color: #00ccff;
+      box-shadow: 0 0 15px #00ccff;
+    }
+
+    .second {
+      width: 4px;
+      height: 100px;
+      background-color: #ff0033;
+      box-shadow: 0 0 10px #ff0033;
+    }
+
+    .center {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: #fff;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .glow {
+      animation: glow 1.5s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.7); }
+      50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.9); }
+      100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.7); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="center"></div>
+    <div class="hour glow"></div>
+    <div class="minute glow"></div>
+    <div class="second glow"></div>
+  </div>
+
+  <script>
+    const hourHand = document.querySelector('.hour');
+    const minuteHand = document.querySelector('.minute');
+    const secondHand = document.querySelector('.second');
+
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      // Calculate the rotation for each hand
+      const hourDeg = (hours % 12) * 30 + (minutes / 60) * 30; // 360 / 12 = 30 degrees per hour
+      const minuteDeg = minutes * 6 + (seconds / 60) * 6; // 360 / 60 = 6 degrees per minute
+      const secondDeg = seconds * 6; // 360 / 60 = 6 degrees per second
+
+      // Apply the rotations to each hand
+      hourHand.style.transform = `translate(-50%, -50%) rotate(${hourDeg}deg)`;
+      minuteHand.style.transform = `translate(-50%, -50%) rotate(${minuteDeg}deg)`;
+      secondHand.style.transform = `translate(-50%, -50%) rotate(${secondDeg}deg)`;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+    updateClock(); // Call once to immediately set the clock
+  </script>
+</body>
+</html>
