@@ -85,3 +85,15 @@ body {
   border-radius: 50%;
   z-index: 4;
 }
+
+.hour-marker {
+  position: absolute;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  top: 10px;
+  left: 50%;
+  transform-origin: center;
+  text-align: center;
+  transform: translateX(-50%);
+}
