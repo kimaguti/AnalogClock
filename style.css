@@ -27,8 +27,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition-timing-function: steps(1);
-  transition-duration: 0.5s;
 }
 
 .hour {
